@@ -8,18 +8,10 @@ import { ReactComponent as DashboardIcon } from "../../assets/icons/BottonNav/Da
 import { ReactComponent as EventIcon } from "../../assets/icons/BottonNav/EventsIcon.svg";
 import { ReactComponent as HealthIcon } from "../../assets/icons/BottonNav/HealthIcon.svg";
 import { ReactComponent as LearnIcon } from "../../assets/icons/BottonNav/LearnIcon.svg";
-import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import "./style.scss";
+
+import React from "react";
 
 const BottomNav = () => {
-  const navigate = useNavigate();
-  const [path, setPath] = useState(window.location.pathname);
-
-  useEffect(() => {
-    setPath(window.location.pathname);
-  }, [window.location.pathname]);
-  console.log(path);
   return (
     <Box>
       <Paper
@@ -46,38 +38,10 @@ const BottomNav = () => {
             },
           }}
         >
-          <BottomNavigationAction
-            className={path === "/dashboard" ? "active" : ""}
-            label="Dashboard"
-            icon={<DashboardIcon />}
-            onClick={() => {
-              navigate("/dashboard");
-            }}
-          />
-          <BottomNavigationAction
-            className={path === "/learn" ? "active" : ""}
-            label="Learn"
-            icon={<LearnIcon />}
-            onClick={() => {
-              navigate("/learn");
-            }}
-          />
-          <BottomNavigationAction
-            className={path === "/health" ? "active" : ""}
-            label="Health"
-            icon={<HealthIcon />}
-            onClick={() => {
-              navigate("/health");
-            }}
-          />
-          <BottomNavigationAction
-            className={path === "/events" ? "active" : ""}
-            label="Events"
-            icon={<EventIcon />}
-            onClick={() => {
-              navigate("/events");
-            }}
-          />
+          <BottomNavigationAction label="Dashboard" icon={<DashboardIcon />} />
+          <BottomNavigationAction label="Learn" icon={<LearnIcon />} />
+          <BottomNavigationAction label="Health" icon={<HealthIcon />} />
+          <BottomNavigationAction label="Event" icon={<EventIcon />} />
         </BottomNavigation>
       </Paper>
     </Box>

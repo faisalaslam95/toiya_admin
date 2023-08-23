@@ -7,7 +7,7 @@ export function ListTitle({ title, icon }) {
     <Grid container spacing={2} alignItems="center">
       <Grid item>
         {" "}
-        <Avatar className="avatar" sx={{ background: "#3b7d7d14 !important" }}>
+        <Avatar className="avatar">
           <img src={icon} />
         </Avatar>
       </Grid>
