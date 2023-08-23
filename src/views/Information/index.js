@@ -22,6 +22,8 @@ import "./style.scss";
 import SocialMediaForm from "./components/Forms/SocialMediaForm.js";
 
 export function Information() {
+
+  const matches = useMediaQuery("(max-width: 600px)");
   const {
     description,
     services,
@@ -134,13 +136,26 @@ export function Information() {
           </CustomCard>
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: '10px', alignItems: 'center', flexDirection: 'row' }}>
+            <Grid item>
+              <Typography variant="h6">Clinics</Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                color="primary"
+                variant="contained"
+                startIcon={<AddIcon />}
+                className={matches ? "contained-icon-button" : "contained-button"}
+                onClick={() => {
+                  setOpenClinicForm(true);
+                }}
+              >
+                {" "}
+                {!matches && "Add Clinic"}
+              </Button>
+            </Grid>
+          </div>
           <CustomCard
-            heading="Clinics"
-            isLoading={isLoadingClinics ?? isFetchingClinics}
-            buttonText="Add Clinic"
-            buttonAction={() => {
-              setOpenClinicForm(true);
-            }}
           >
             <CardListing
               list={clinics}
@@ -149,8 +164,9 @@ export function Information() {
           </CustomCard>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <CustomCard heading="Toiyabe Social" noSearch>
-            <SocialMediaForm urls={urls} />
+          <CustomCard heading="Toiyabe Social" noSearch 
+            >
+            <SocialMediaForm urls={urls} sx={{ marginBottom: '6px', }} />
           </CustomCard>
         </Grid>
       </Grid>

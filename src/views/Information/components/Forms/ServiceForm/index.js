@@ -118,14 +118,14 @@ export default function ServiceForm({
             Add Photos
           </Typography>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <ImageUploader
                 fileType="image"
                 selectedFile={selectedImageOne}
                 setSelectedFile={setSelectedImageOne}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <ImageUploader
                 fileType="image"
                 selectedFile={selectedImageTwo}
