@@ -1,0 +1,77 @@
+.table-header {
+  background: #f3f6f9;
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+
+  .item {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: #6f6f6f;
+  }
+}
+
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row {
+  background: #ffffff;
+  box-shadow: 0px 6px 20px rgba(36, 41, 41, 0.1);
+  border-radius: 16px;
+  margin-bottom: 20px;
+
+  .wrapper {
+    padding: 16px;
+    .avatar {
+      margin-right: 16px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50% !important;
+    }
+    .avatar-small {
+      margin-right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+    .text {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      color: #000000;
+    }
+    .text-small {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #000000;
+    }
+    .email-small {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 150%;
+      color: #525252;
+    }
+    .level {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      color: #6f6f6f;
+    }
+  }
+}
+.contained-icon-button {
+  padding: 8px !important;
+  border-radius: 8px !important;
+  min-width: 0px !important;
+  span {
+    margin: 0px;
+  }
+}
