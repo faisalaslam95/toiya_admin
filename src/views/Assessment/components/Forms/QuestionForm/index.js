@@ -9,39 +9,45 @@ import useQuestionForm from "../../../hooks/useQuestionForm";
 import CustomButton from "../../../../../components/CustomButton";
 import { useGetSingleAssessment } from "../../../../../hooks/useGetAssessmentQuestions";
 
+
 const Actions = ({ handleCheck, handleRemove, idx, checked }) => {
   return (
-    <Grid container>
-      <Grid item mr={1}>
-        <IconButton
-          onClick={() => handleCheck(idx)}
-          sx={{
-            borderRadius: "10px",
-            background: !checked ? "rgba(153, 153, 153, 0.08)" : "#5ED87B",
-          }}
-        >
-          <CheckIcon sx={{ color: checked ? "#fff" : "#6F6F6F" }} />
-        </IconButton>
-      </Grid>
-      <Grid item mr={1}>
-        {" "}
-        <Button
-          variant="contained"
-          startIcon={<ClearIcon />}
-          onClick={() => handleRemove(idx)}
-          sx={{
-            background: "rgba(243, 97, 124, 0.1)",
-            color: "rgba(243, 97, 124, 1)",
-            boxShadow: "none",
-            borderRadius: "10px",
-          }}
-        >
-          Remove
-        </Button>
-      </Grid>
-    </Grid>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <IconButton
+        onClick={() => handleCheck(idx)}
+        sx={{
+          borderRadius: "10px",
+          background: !checked ? "rgba(153, 153, 153, 0.08)" : "#5ED87B",
+          marginRight: '5px',
+        }}
+      >
+        <CheckIcon sx={{ color: checked ? "#fff" : "#6F6F6F" }} />
+      </IconButton>
+      <Button
+        variant="contained"
+        startIcon={<ClearIcon />}
+        onClick={() => handleRemove(idx)}
+        mr={1}
+        sx={{
+          background: "rgba(243, 97, 124, 0.1)",
+          color: "rgba(243, 97, 124, 1)",
+          boxShadow: "none",
+          borderRadius: "10px",
+          marginRight: '5px',
+        }}
+      >
+        Remove
+      </Button>
+    </div>
   );
 };
+
 
 export default function QuestionForm({ setOpen, initialState, isEdit }) {
   const {

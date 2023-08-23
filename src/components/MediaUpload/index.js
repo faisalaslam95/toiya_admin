@@ -86,20 +86,12 @@ const ImageUploader = ({
                 <ClearIcon />
               </IconButton>
             </Grid>
-            {fileType === "image" ? (
+            {fileType !== "pdf" ? (
               <img
                 src={selectedFile.fileUrl}
                 alt="Uploaded"
                 className="--image"
               />
-            ) : fileType === "video" ? (
-              <video controls className="--video">
-                <source
-                  src={selectedFile.fileUrl}
-                  type={selectedFile.fileType}
-                />
-                Your browser does not support the video tag.
-              </video>
             ) : (
               <>
                 <Grid component="span" className="icon" mb={2}>

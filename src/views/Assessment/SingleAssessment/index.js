@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AlertDialog from "../../../components/AlertDialog";
@@ -15,6 +15,7 @@ import {
 import useSingleAssessment from "../hooks/useSingleAssessment";
 
 export default function SingleAssessment() {
+  const matches = useMediaQuery("(max-width: 600px)");
   const {
     questions,
     openQusetion,
@@ -41,7 +42,7 @@ export default function SingleAssessment() {
           message={
             <QuestionForm
               setOpen={setOpenQuestion}
-              // allQuestions={assessment.questions}
+            // allQuestions={assessment.questions}
             />
           }
         />
@@ -74,11 +75,11 @@ export default function SingleAssessment() {
                   color="primary"
                   variant="contained"
                   startIcon={<AddIcon />}
-                  className="contained-button"
+                  className={matches ? "contained-icon-button" : "contained-button"}
                   onClick={() => setOpenQuestion(true)}
                 >
                   {" "}
-                  Add
+                  {!matches && "Add"}
                 </Button>
               </Grid>
             </Grid>
@@ -109,11 +110,11 @@ export default function SingleAssessment() {
                   color="primary"
                   variant="contained"
                   startIcon={<AddIcon />}
-                  className="contained-button"
+                  className={matches ? "contained-icon-button" : "contained-button"}
                   onClick={() => setOpenCondition(true)}
                 >
                   {" "}
-                  Add
+                  {!matches && "Add"}
                 </Button>
               </Grid>
             </Grid>

@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import icons from "../../assets/index";
 import "./list.scss";
-import { Alert } from "@mui/material";
+import { Alert, useMediaQuery } from "@mui/material";
 
 const Paper = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -24,84 +24,171 @@ export function CustomList({
   listing,
   onRowClick,
   indexed,
-  noData,
 }) {
   const removeOnClick = (event) => {
     event.stopPropagation();
   };
 
+  const matches = useMediaQuery("(max-width: 600px)");
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container>
-        <Grid item xs={12}>
-          <Paper>
-            {list?.length === 0 ? (
-              <Alert sx={{ mt: 2 }} severity="error">
-                {noData ?? "No data found!"}
-              </Alert>
-            ) : (
-              <List dense={false} className="listing">
-                {list?.map((item, index) => (
-                  <ListItem
-                    className="listing-item"
-                    secondaryAction={
-                      !!Actions ? (
-                        <Grid onClick={removeOnClick}>
-                          <Actions data={item} list={list} />
-                        </Grid>
-                      ) : (
-                        <IconButton edge="end" aria-label="delete">
-                          <img src={icons.editIcon} />
-                        </IconButton>
-                      )
-                    }
-                    sx={{ cursor: onRowClick && "pointer" }}
-                    onClick={() => onRowClick(item)}
-                  >
-                    <ListItemAvatar sx={{ mr: 2 }}>
-                      {indexed ? (
-                        <Grid
-                          container
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          px={3}
-                          py={2}
-                          className="text-avatar"
-                        >
-                          <Typography className="text">{item.text}</Typography>
-                        </Grid>
-                      ) : (
-                        <Avatar
-                          className={
-                            listing === "events"
-                              ? "image-avatar avatar"
-                              : "avatar"
+        <Grid item xs={12} sx={{marginTop:'20px', marginBottom:'20px'}}>
+          {
+            matches ? (
+              <Paper>
+                {list?.length === 0 ? (
+                  <Alert sx={{ mt: 2 }} severity="error">
+                    No data found!
+                  </Alert>
+                ) : (
+                  <List dense={false} className="listing">
+                    {list?.map((item, index) => (
+                      <ListItem
+                        container
+                        flexDirection='column'
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        px={3}
+                        py={2}
+                        className="listing-item"
+                        sx={{ cursor: onRowClick && "pointer", display: 'flex', flexDirection: 'column', flexWrap: 'wrap' }}
+                        onClick={() => onRowClick(item)}
+                      >
+                        <Grid container
+                          justifyContent={"space-between"}
+                          alignItems={"center"}>
+                          <ListItemAvatar sx={{ mr: 2 }}>
+                            {indexed ? (
+                              <Grid
+                                container
+                                justifyContent={"center"}
+                                alignItems={"center"}
+                                className="text-avatar"
+                                sx={{ py: 1, px: 1 }}
+                              >
+                                <Typography className="text">{item.text}</Typography>
+                              </Grid>
+                            ) : (
+                              <Avatar
+                                className={
+                                  listing === "events"
+                                    ? "image-avatar avatar"
+                                    : "avatar"
+                                }
+                              >
+                                {" "}
+                                <img src={icon ?? item.icon} />
+                              </Avatar>
+                            )}
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={
+                              <Typography className="primary-text">
+                                {item?.title}
+                              </Typography>
+                            }
+                          />
+                          <ListItemAvatar sx={{ mr: 2 }}>{
+                            !!Actions ? (
+                              <Grid onClick={removeOnClick}>
+                                <Actions data={item} list={list} />
+                              </Grid>
+                            ) : (
+                              <IconButton edge="end" aria-label="delete">
+                                <img src={icons.editIcon} />
+                              </IconButton>
+                            )
                           }
+                          </ListItemAvatar>
+                        </Grid>
+                        <Grid container
+                          justifyContent={"center"}
+                          alignItems={"center"}>
+                          <ListItemText
+                            secondary={
+                              <Typography className="secondary-text">
+                                {item?.subtitle ?? ""}
+                              </Typography>
+                            }
+                          />
+                        </Grid>
+
+                      </ListItem>
+                    ))}
+                  </List>
+                )}
+              </Paper>)
+              : (
+                <Paper>
+                  {list?.length === 0 ? (
+                    <Alert sx={{ mt: 2 }} severity="error">
+                      No data found!
+                    </Alert>
+                  ) : (
+                    <List dense={false} className="listing">
+                      {list?.map((item, index) => (
+                        <ListItem
+                          className="listing-item"
+                          secondaryAction={
+                            !!Actions ? (
+                              <Grid onClick={removeOnClick}>
+                                <Actions data={item} list={list} />
+                              </Grid>
+                            ) : (
+                              <IconButton edge="end" aria-label="delete">
+                                <img src={icons.editIcon} />
+                              </IconButton>
+                            )
+                          }
+                          sx={{ cursor: onRowClick && "pointer" }}
+                          onClick={() => onRowClick(item)}
                         >
-                          {" "}
-                          <img src={icon ?? item.icon} />
-                        </Avatar>
-                      )}
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <Typography className="primary-text">
-                          {item?.title}
-                        </Typography>
-                      }
-                      secondary={
-                        <Typography className="secondary-text">
-                          {item?.subtitle ?? ""}
-                        </Typography>
-                      }
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            )}
-          </Paper>
+                          <ListItemAvatar sx={{ mr: 2 }}>
+                            {indexed ? (
+                              <Grid
+                                container
+                                justifyContent={"center"}
+                                alignItems={"center"}
+                                px={3}
+                                py={2}
+                                className="text-avatar"
+                              >
+                                <Typography className="text">{item.text}</Typography>
+                              </Grid>
+                            ) : (
+                              <Avatar
+                                className={
+                                  listing === "events"
+                                    ? "image-avatar avatar"
+                                    : "avatar"
+                                }
+                              >
+                                {" "}
+                                <img src={icon ?? item.icon} />
+                              </Avatar>
+                            )}
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={
+                              <Typography className="primary-text">
+                                {item?.title}
+                              </Typography>
+                            }
+                            secondary={
+                              <Typography className="secondary-text">
+                                {item?.subtitle}
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  )}
+                </Paper>)
+          }
         </Grid>
       </Grid>
     </Box>
   );
-}
+};
