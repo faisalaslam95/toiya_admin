@@ -24,7 +24,7 @@ export function Events() {
       {open && (
         <AlertDialog
           open={open}
-          title="Add Service"
+          title="Add Event"
           setOpen={setOpen}
           message={<EventForm open={open} setOpen={setOpen} />}
         />
