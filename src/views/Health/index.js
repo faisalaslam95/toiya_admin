@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, CircularProgress, Typography } from "@mui/material";
+import { Grid, Button, CircularProgress, Typography, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Actions, TreatmentActions } from "./components/Actions";
 import { CustomList } from "../../components/List";
@@ -21,6 +21,7 @@ import { TreatmentList } from "./components/TreatmentList";
 import { TreatmentResourceActions } from "./components/Actions";
 
 export function Health() {
+  const matches = useMediaQuery("(max-width: 600px)");
   const {
     tab,
     setTab,
@@ -70,7 +71,7 @@ export function Health() {
         <AlertDialog
           open={openAddProvider}
           setOpen={setOpenAddProvider}
-          title={"Add Medication"}
+          title={"Add Provider"}
           message={<ProviderForm setOpen={setOpenAddProvider} />}
         />
       )}
@@ -113,25 +114,11 @@ export function Health() {
             tab={tab}
           />
         </Grid>
-        {tab === 1 && (
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              startIcon={<AddIcon />}
-              className="contained-button"
-              onClick={handleClick}
-            >
-              {" "}
-              Add
-            </Button>
-          </Grid>
-        )}
       </Grid>
       {tab === 0 && (
         <Grid container>
           <Grid item container columnSpacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Grid
                 container
                 justifyContent={"space-between"}
@@ -145,11 +132,11 @@ export function Health() {
                   color="primary"
                   variant="contained"
                   startIcon={<AddIcon />}
-                  className="contained-button"
+                  className={matches ? "contained-icon-button" : "contained-button"}
                   onClick={() => setOpenGroupSessionForm(true)}
                 >
                   {" "}
-                  Add Group Sessions
+                  {!matches && "Add Group Sessions"}
                 </Button>
               </Grid>
               <Grid container>
@@ -164,7 +151,7 @@ export function Health() {
                 </CustomCard>
               </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Grid
                 container
                 justifyContent={"space-between"}
@@ -176,11 +163,11 @@ export function Health() {
                   color="primary"
                   variant="contained"
                   startIcon={<AddIcon />}
-                  className="contained-button"
+                  className={matches ? "contained-icon-button" : "contained-button"}
                   onClick={() => setOpenMedicationForm(true)}
                 >
                   {" "}
-                  Add Medication
+                  {!matches && "Add Medication"}
                 </Button>
               </Grid>
               <Grid container>
@@ -207,11 +194,11 @@ export function Health() {
               color="primary"
               variant="contained"
               startIcon={<AddIcon />}
-              className="contained-button"
+              className={matches ? "contained-icon-button" : "contained-button"}
               onClick={() => setOpenTreatmentForm(true)}
             >
               {" "}
-              Add Treatment
+              {!matches && "Add Treatment"}
             </Button>
           </Grid>
           <Grid item container>
@@ -226,11 +213,31 @@ export function Health() {
         </Grid>
       )}
       {tab === 1 && (
-        <CustomList
-          Actions={Actions}
-          list={providers}
-          icon={icons.peopleIcon}
-        />
+        <Grid container>
+          <Grid item xs={12} container  justifyContent={"flex-end"}>
+            <Button
+              color="primary"
+              variant="contained"
+              startIcon={<AddIcon />}
+              sx={{
+                position: "relative",
+                top: "-33px",
+                transform: "translateY(-50%)",}}
+              className={matches ? "contained-icon-button" : "contained-button"}
+              onClick={() => setOpenAddProvider(true)}
+            >
+              {" "}
+              {!matches && "Add"}
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <CustomList
+              Actions={Actions}
+              list={providers}
+              icon={icons.peopleIcon}
+            />
+          </Grid>
+        </Grid>
       )}
     </>
   );
