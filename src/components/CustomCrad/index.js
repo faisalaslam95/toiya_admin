@@ -30,7 +30,7 @@ export default function CustomCard({
         >
           {heading && (
             <Grid item>
-              <Typography className="card-heading">{heading}</Typography>
+              <Typography className="card-heading" sx={{padding: '15px' }}>{heading}</Typography>
             </Grid>
           )}
           {buttonText && (
@@ -49,27 +49,6 @@ export default function CustomCard({
       <Grid item className="card-container">
         {" "}
         <Grid container className="card-wrapper">
-          {/* {!noSearch && (
-            <Grid
-              item
-              xs={12}
-              sx={{ mb: { xs: 3, sm: 2 } }}
-              className="search-field"
-            >
-              {" "}
-              <TextField
-                fullWidth
-                placeholder="Search"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start" sx={{ pl: 2 }}>
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              ></TextField>
-            </Grid>
-          )} */}
           {!!isLoading ? (
             <Grid container alignItems="center" justifyContent="center">
               <CircularProgress />

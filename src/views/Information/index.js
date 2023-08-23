@@ -166,7 +166,7 @@ export function Information() {
         <Grid item xs={12} sm={6}>
           <CustomCard heading="Toiyabe Social" noSearch 
             >
-            <SocialMediaForm urls={urls} sx={{ marginBottom: '6px', }} />
+            <SocialMediaForm urls={urls} sx={{ marginBottom: '6px',  }} />
           </CustomCard>
         </Grid>
       </Grid>
