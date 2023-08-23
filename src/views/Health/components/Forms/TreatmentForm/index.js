@@ -4,6 +4,7 @@ import { Controller } from "react-hook-form";
 import CustomTextfield from "../../../../../components/CustomTextfield";
 import CustomButton from "../../../../../components/CustomButton";
 import useTreatmentForm from "../../../hooks/useTreatmentForm";
+import { ReactComponent as DocumentIcon } from "../../../../../assets/icons/document.svg";
 
 export const TreatmentForm = (props) => {
   const { onSubmit, handleSubmit, control, isEdit, isLoading } =
@@ -19,6 +20,7 @@ export const TreatmentForm = (props) => {
             render={({ field }) => (
               <CustomTextfield
                 label="Treatment Name"
+                EndIcon={DocumentIcon}
                 placeholder="Type in title..."
                 {...field}
               />

@@ -4,6 +4,8 @@ import { Controller } from "react-hook-form";
 import CustomTextfield from "../../../../../components/CustomTextfield";
 import CustomButton from "../../../../../components/CustomButton";
 import useMedicationForm from "../../../hooks/useMedicationForm";
+import { ReactComponent as LinkIcon } from "../../../../../assets/icons/link.svg";
+import { ReactComponent as CDIcon } from "../../../../../assets/icons/cd.svg";
 
 export const MedicationForm = (props) => {
   const {
@@ -26,6 +28,7 @@ export const MedicationForm = (props) => {
             render={({ field }) => (
               <CustomTextfield
                 label="Medication Name"
+                EndIcon={CDIcon}
                 placeholder="Enter Medication Name"
                 {...field}
               />
@@ -40,6 +43,7 @@ export const MedicationForm = (props) => {
             render={({ field }) => (
               <CustomTextfield
                 label="Medication Url"
+                EndIcon={LinkIcon}
                 placeholder="Enter URL to Medication Information"
                 {...field}
               />
