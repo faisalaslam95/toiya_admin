@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AlertDialog from "../../components/AlertDialog";
 import { CustomList } from "../../components/List";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
 export function Assessment() {
+  const matches = useMediaQuery("(max-width: 600px)");
   const [open, setOpen] = useState(false);
   const { assessments, isLoading, isFetching } = useGetAssessments({});
   const navigate = useNavigate();
@@ -34,11 +35,11 @@ export function Assessment() {
             color="primary"
             variant="contained"
             startIcon={<AddIcon />}
-            className="contained-button"
+            className={matches ? "contained-icon-button" : "contained-button"}
             onClick={() => setOpen(true)}
           >
             {" "}
-            Add
+            {!matches && "Add"}
           </Button>
         </Grid>
       </Grid>
