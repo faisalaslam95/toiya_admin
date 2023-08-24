@@ -6,6 +6,8 @@ import CustomButton from "../../../../../components/CustomButton";
 import MediaUpload from "../../../../../components/MediaUpload";
 import useTreatmentResourceForm from "../../../hooks/useTreatmentResourceForm";
 import { PdfFile } from "../../PdfFile";
+import { ReactComponent as DocumentIcon } from "../../../../../assets/icons/document.svg";
+
 
 const StyledHeading = ({ children }) => (
   <Typography
@@ -50,6 +52,7 @@ export default function TreatmentResourceForm({
               <CustomTextfield
                 label="Title"
                 placeholder="Type in title"
+                EndIcon={DocumentIcon}
                 {...field}
               />
             )}
@@ -74,8 +77,8 @@ export default function TreatmentResourceForm({
             {isLoading
               ? "Loading..."
               : isEdit
-              ? "Update Resource"
-              : "Save Resource"}
+                ? "Update Resource"
+                : "Save Resource"}
           </CustomButton>
         </Grid>
         {isEdit && (

@@ -116,7 +116,7 @@ export default function ClinicForm({ initialState, isEdit, setOpen }) {
                   />
                 </Grid>
                 <Grid container item xs={12} mt={2} spacing={2}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={6}>
                     <CustomTextfield
                       label="Phone 1"
                       placeholder="Enter phone"
@@ -127,7 +127,7 @@ export default function ClinicForm({ initialState, isEdit, setOpen }) {
                       EndIcon={PhoneIcon}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={6}>
                     {" "}
                     <CustomTextfield
                       label="Phone 2 (optional)"
@@ -156,14 +156,14 @@ export default function ClinicForm({ initialState, isEdit, setOpen }) {
             Add Photos
           </Typography>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <ImageUploader
                 fileType="image"
                 selectedFile={selectedImageOne}
                 setSelectedFile={setSelectedImageOne}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <ImageUploader
                 fileType="image"
                 selectedFile={selectedImageTwo}

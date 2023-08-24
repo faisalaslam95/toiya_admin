@@ -32,6 +32,9 @@ const CustomTextField = styled((props) => <TextField focused {...props} />)(
         border: "1px solid #DCDCDC",
         borderRadius: "14px",
       },
+      // "& .MuiFormLabel-root.Mui-focused": {
+      //   color: theme.palette.primary.main,
+      // },
       transition: theme.transitions.create([
         "border-color",
         "background-color",
@@ -65,7 +68,6 @@ export default function CustomTextfield({
   multiline,
   handleEnterKeyPress,
   sx,
-  ref,
   ...rest
 }) {
   return (

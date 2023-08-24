@@ -110,14 +110,13 @@ export const TreatmentResource = ({ treatment, ResourceActions }) => {
         : !data?.length
         ? "No data found!"
         : data?.map((resource, index) => (
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               {index !== 0 && index !== 1 && (
                 <div
                   className="itemDivider"
                   style={{ marginBottom: "16px" }}
                 ></div>
               )}
-
               <Grid
                 container
                 justifyContent={"space-between"}
@@ -144,6 +143,7 @@ export const TreatmentResource = ({ treatment, ResourceActions }) => {
                   <ResourceActions resource={resource} treatment={treatment} />
                 </Grid>
               </Grid>
+
             </Grid>
           ))}
     </>

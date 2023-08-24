@@ -1,22 +1,15 @@
-import React, { useState, useRef } from "react";
-import {
-  Grid,
-  Typography,
-  Box,
-  Menu,
-  TextField,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import React from "react";
+import { Grid, Typography, Box, Menu } from "@mui/material";
 import { Controller } from "react-hook-form";
 import CustomTextfield from "../../../../../components/CustomTextfield";
 import CustomButton from "../../../../../components/CustomButton";
 import useGroupSessionForm from "../../../hooks/useGroupSessionForm";
 import { BasicDatePicker } from "../../../../../components/DatePicker";
+import { ReactComponent as EditIcon } from "../../../../../assets/icons/edit.svg";
 import { ReactComponent as CalenderIcon } from "../../../../../assets/icons/calendar.svg";
 import { ReactComponent as ClockIcon } from "../../../../../assets/icons/clock.svg";
-import DatePicker from "../../../../../components/CustomDatePicker";
+import { ReactComponent as LocationIcon } from "../../../../../assets/icons/location.svg";
+import { ReactComponent as DocumentIcon } from "../../../../../assets/icons/document.svg";
 
 export const GroupSessionForm = (props) => {
   const {
@@ -27,17 +20,7 @@ export const GroupSessionForm = (props) => {
     isLoading,
     onDelete,
     isLoadingDelete,
-    date,
-    setDate,
   } = useGroupSessionForm(props);
-
-  const timeInputRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleIconClick = () => {
-    setIsOpen(true);
-    timeInputRef.current.focus();
-  };
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
       <Grid container>
@@ -50,27 +33,41 @@ export const GroupSessionForm = (props) => {
               <CustomTextfield
                 label="Group Session Name"
                 placeholder="Enter Group Session Name"
+                EndIcon={EditIcon}
                 {...field}
               />
             )}
           />
         </Grid>
         <Grid item container spacing={1}>
-          <Grid item xs={6} mb={3}>
+          <Grid item xs={12} mb={3}>
             {" "}
-            <DatePicker date={date} setDate={setDate} />
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <CustomTextfield
+                    label="Date"
+                    placeholder="Enter Date"
+                    EndIcon={CalenderIcon}
+                    {...field}
+                  />
+                  <BasicDatePicker />
+                </>
+              )}
+            />
           </Grid>
-
-          <Grid item xs={6} mb={3}>
+          <Grid item xs={12} mb={3}>
             {" "}
             <Controller
               name="time"
               control={control}
               render={({ field }) => (
                 <CustomTextfield
-                  type="time"
                   label="Time"
                   placeholder="Enter Time"
+                  EndIcon={ClockIcon}
                   {...field}
                 />
               )}
@@ -86,6 +83,7 @@ export const GroupSessionForm = (props) => {
               <CustomTextfield
                 label="Location"
                 placeholder="Enter Location"
+                EndIcon={LocationIcon}
                 {...field}
               />
             )}
@@ -100,6 +98,7 @@ export const GroupSessionForm = (props) => {
               <CustomTextfield
                 label="Description"
                 placeholder="Enter short bio"
+                EndIcon={DocumentIcon}
                 multiline
                 rows={4}
                 {...field}

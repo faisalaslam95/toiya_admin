@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { addProvider, updateProvider } from "../actions";
 import { useMutation, useQueryClient } from "react-query";
-import moment from "moment";
 
 const myCustomLocale = {
   months: [
@@ -80,30 +79,15 @@ const myCustomLocale = {
 };
 
 const defaultAvailableTimes = [
-  { label: "1:00am", value: "01:00am", isSelected: false },
-  { label: "2:00am", value: "02:00am", isSelected: false },
-  { label: "3:00am", value: "03:00am", isSelected: false },
-  { label: "4:00am", value: "04:00am", isSelected: false },
-  { label: "5:00am", value: "05:00am", isSelected: false },
-  { label: "6:00am", value: "06:00am", isSelected: false },
-  { label: "7:00am", value: "07:00am", isSelected: false },
-  { label: "8:00am", value: "08:00am", isSelected: false },
-  { label: "9:00am", value: "09:00am", isSelected: false },
+  { label: "9:00am", value: "9:00am", isSelected: false },
+  { label: "9:00am", value: "9:00", isSelected: false },
   { label: "10:00am", value: "10:00am", isSelected: false },
+  { label: "9:00am", value: "9:00", isSelected: false },
   { label: "11:00am", value: "11:00am", isSelected: false },
+  { label: "9:00am", value: "9:00", isSelected: false },
   { label: "12:00pm", value: "12:00pm", isSelected: false },
-  { label: "1:00pm", value: "01:00pm", isSelected: false },
-  { label: "2:00pm", value: "02:00pm", isSelected: false },
-  { label: "3:00pm", value: "03:00pm", isSelected: false },
-  { label: "4:00pm", value: "04:00pm", isSelected: false },
-  { label: "5:00pm", value: "05:00pm", isSelected: false },
-  { label: "6:00pm", value: "06:00pm", isSelected: false },
-  { label: "7:00pm", value: "07:00pm", isSelected: false },
-  { label: "8:00pm", value: "08:00pm", isSelected: false },
-  { label: "9:00pm", value: "09:00pm", isSelected: false },
-  { label: "10:00pm", value: "10:00pm", isSelected: false },
-  { label: "11:00pm", value: "11:00pm", isSelected: false },
-  { label: "12:00am", value: "12:00am", isSelected: false },
+  { label: "9:00am", value: "9:00", isSelected: false },
+  { label: "1:00pm", value: "1:00pm", isSelected: false },
 ];
 
 export const useProviderAvailabilityForm = (props) => {
@@ -111,23 +95,21 @@ export const useProviderAvailabilityForm = (props) => {
 
   const { control, handleSubmit, reset } = useForm();
   const [selectedDays, setSelectedDays] = useState(
-    initialState?.availabilities?.map(({ date }) => {
+    initialState?.availabilities?.days?.map((day) => {
       return {
-        year: Number(date.split("-")[0]),
-        month: Number(date.split("-")[1]),
-        day: Number(date.split("-")[2]),
+        year: Number(day.split("-")[0]),
+        month: Number(day.split("-")[1]),
+        day: Number(day.split("-")[2]),
       };
     }) ?? []
   );
   const queryClient = useQueryClient();
   const [availableTimes, setAvailableTimes] = useState(
-    defaultAvailableTimes.map((timeSlot) => {
-      const isSelected = initialState?.availabilities.some((selectedTime) => {
-        return timeSlot.value === selectedTime.time;
-      });
-
-      return { ...timeSlot, isSelected };
-    })
+    defaultAvailableTimes?.map((time) =>
+      initialState?.availabilities?.hours?.includes(time.value)
+        ? { ...time, isSelected: true }
+        : time
+    ) ?? defaultAvailableTimes
   );
 
   const { isLoading, mutate } = useMutation(updateProvider, {
@@ -151,23 +133,22 @@ export const useProviderAvailabilityForm = (props) => {
   };
 
   const onSubmit = () => {
-    const days = selectedDays.map((day) =>
-      moment(`${day.year}-${day.month}-${day.day}`).format("YYYY-MM-DD")
+    const days = selectedDays.map(
+      (day) => `${day.year}-${day.month}-${day.day}`
     );
-
     const hours = availableTimes
       .filter((time) => time.isSelected)
-      .map((hour) => hour.value);
+      .map((hour) => hour.label);
 
     const availabilities = [].concat(
-      ...days.map((date) => {
-        return hours.map((time) => {
-          return { date, time };
+      ...days.map((day) => {
+        return hours.map((hour) => {
+          return { day, hour };
         });
       })
     );
 
-    mutate({ availabilities, id: initialState.id });
+    mutate({ ...availabilities, id: initialState.id });
   };
 
   useEffect(() => {
